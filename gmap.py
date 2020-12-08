@@ -18,6 +18,8 @@ class Tile:
         self.down = dwn
     
     def get_description(self):
+        if self.item is not None:
+            self.description += 'There is ' + ii.item.get_description()
         return self.description
     
     def has_item(self, item_name):
