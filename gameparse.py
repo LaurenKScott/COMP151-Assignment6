@@ -44,6 +44,10 @@ class Parser:
 class GParser(Parser):
     def __init__(self):
         Parser.__init__(self)
+
+    def cannot_do(self):
+        print("Can't do that")
+
     # Define exit clause
     def continue_game(self):
         verb = self.get_verb()
@@ -62,14 +66,28 @@ class GParser(Parser):
             # returns new current tile, see mp for travel documentation
             mp.game_map.travel(current_tile, nxt_tile)
 
-    def use_item(self, item_name, obs_name):
-        if item_name not in mp.ii.g_inv.items_by_name:
-            print()
+    def view_item(self, item):
+        pass
 
+    def take_item(self, loc, item):
+        if mp.loc.has_item(item.get_name()):
+            mp.ii.g_inv.add_item(item)
+        else:
+            self.cannot_do()
+
+    def use_item(self, item_name, cur_obs):
+        if item_name not in mp.ii.g_inv.items_by_name:
+            self.cannot_do()
+        elif item_name == mp.ii.cur_obs.get_weakness():
+            # find item in inventory's items by name dict
+            item_used = mp.ii.g_inv.items_by_name[item_name]
+            # call rem_item method, returns updated dict
+            mp.ii.g_inv.rem_item(item_used)
+            
 #game-specific parser
 cmdp = GParser()
 cmdp.recognized_commands = ['go', 'exit', 'view', 'take', 'use']
 cmdp.recognized_nouns = ['north', 'east', 'south', 'west', 'up', 'down',
 'game']
 cmdp.recognized_nouns.extend(mp.ii.item_nouns)
-print(cmdp.recognized_nouns)
+
