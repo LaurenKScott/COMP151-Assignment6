@@ -33,6 +33,7 @@ class Obstacle(Item):
         elif input_obj.get_name() == self.weakness.get_name():
             return True
         return False
+        
 class Inventory:
     def __init__(self):
         # dictionary of items. key is item name, val is actual item object

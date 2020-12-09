@@ -1,15 +1,12 @@
-"""
 
-"""
 #import iteminventory module to place items in tiles
 import iteminventory as ii
 
 class Tile:
-    def __init__(self, des, item=None, obs=None,
+    def __init__(self, des, item=None,
      nor=None, eas=None, sou=None, wes=None, up=None, dwn=None):
         self.description = des
         self.item = item
-        self.obs = obs
         self.north = nor
         self.east = eas
         self.south = sou
@@ -21,7 +18,10 @@ class Tile:
         if self.item is not None:
             self.description += 'There is ' + ii.item.get_description()
         return self.description
-    
+
+    def get_current(self):
+        return self
+
     def has_item(self, item_name):
         if item_name == self.item.get_name():
             return True
@@ -74,3 +74,4 @@ tile6.obs = ii.boat #unlocks axe
 
 #initialize game map
 game_map = Grid(start_pos=tile0)
+tile0.get_current()

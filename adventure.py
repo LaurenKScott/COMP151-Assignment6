@@ -20,11 +20,18 @@ island = mp.game_map
 #Initialize parser
 parser = pr.cmdp
 
+def win_condition():
+    if ii.unlit_wick.unlock == True:
+        print("you win")
+        return True
+    return False
 #set win condition
 def main():
     print("Welcome to The Lighthouse.")
     while parser.continue_game():
         user_command = input("Enter a command: ")
+        parser.parse(user_command)
+
     else:
         print("Goodbye.")
         exit
