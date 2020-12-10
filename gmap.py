@@ -3,10 +3,11 @@
 import iteminventory as ii
 
 class Tile:
-    def __init__(self, des, item=None,
+    def __init__(self, des, item=None, inv=None,
      nor=None, eas=None, sou=None, wes=None, up=None, dwn=None):
         self.description = des
         self.item = item
+        self.inv = ii.Inventory()
         self.north = nor
         self.east = eas
         self.south = sou
@@ -16,22 +17,29 @@ class Tile:
     
     def get_description(self):
         if self.item is not None:
-            self.description += 'There is ' + ii.item.get_description()
+            return self.description + "There is " + self.item.get_description()
         return self.description
 
-    def get_current(self):
-        return self
+    def build_inv(self):
+        if self.item is not None:
+            self.inv.add_item(self.item)
 
     def has_item(self, item_name):
-        if item_name == self.item.get_name():
+        if item_name in self.inv.items_by_name:
             return True
         return False
 
 class Grid:
-    def __init__(self, start_pos = None):
+    def __init__(self, start_pos = None, current_pos=None):
         self.start_pos = start_pos
+        self.current_pos = current_pos
+    
+    def get_location(self):
+        #returns a tile
+        return self.current_pos
 
-    def travel(self, current, nxt):
+    def travel(self,  nxt):
+        current = self.current_pos
         if nxt is None:
             print("Can't go there")
         else:
@@ -65,13 +73,11 @@ tile9.down, tile9.up = tile8, tile10
 tile10.down = tile9
 
 #place obstacles in proper tiles (see iteminventory.py)
+
 tile0.item = ii.rock
-tile2.obs = ii.bird #use bread to unlock nest, unlocks cotton
-tile3.obs = ii.grave #unlocks shovel
-tile4.obs = ii.mermaid #unlocks medusa, then use axe to unlock key
-tile5.obs = ii.rations #use shovel to unlock bread
-tile6.obs = ii.boat #unlocks axe
+tile0.build_inv()
+
 
 #initialize game map
-game_map = Grid(start_pos=tile0)
-tile0.get_current()
+game_map = Grid(start_pos=tile0, current_pos=tile0)
+

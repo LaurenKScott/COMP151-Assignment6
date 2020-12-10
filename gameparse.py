@@ -9,20 +9,17 @@ class Parser:
         # A list of nouns (and directions!) 
         self.recognized_nouns = []
         # Initialize a verb and noun both None
-        self.verb, self.noun = None, None
 
     #a parser to separate verb and noun from user input
     def parse(self, phrase):
+        self.verb, self.noun = None, None
         phrase_as_list = phrase.split()
         # Check if first word of phrase is a recognized command verb
         parse_verb = phrase_as_list[0].lower()
         if parse_verb not in self.recognized_commands:
             print("Unrecognized verb:", parse_verb)
         else:
-            self.verb = parse_verb
-        # phrase is incomplete if length < 2 and phrase != exit    
-        if len(phrase_as_list) < 2 and self.verb != 'exit':
-            print("Please enter a complete phrase.")
+            self.verb = parse_verb    
         #extract noun from phrase, check against list
         if len(phrase_as_list) > 1:
             parse_noun = phrase_as_list[1].lower()
@@ -57,7 +54,7 @@ class GParser(Parser):
         return True
     
     def go(self, current_tile, direction):
-        current_tile = mp.get_current()
+       
         if direction not in ['up', 'down', 'north', 'east', 'south', 'west']:
             print("Invalid direction")
         else: 
@@ -66,19 +63,30 @@ class GParser(Parser):
             # returns new current tile, see mp for travel documentation
             mp.game_map.travel(current_tile, nxt_tile)
 
-    def view(self, item=None):
+    def view(self, inp_noun=None):
         #view inventory condition
-        if item == "inventory":
+        if inp_noun == "inventory":
             mp.ii.g_inv.describe_all()
-        # view current tile desctiption
-        elif item == None:
-            pass
+        elif inp_noun == None:
+        # view current tile description
+            tile_view = mp.game_map.get_location()
+            print(tile_view.get_description())
         else:
-            print(item.get_description())
+            tile_inv =  mp.game_map.get_location().inv
+            if tile_inv.in_inventory(inp_noun):
+                print(tile_inv.items_by_name[inp_noun].get_description())
+            else:
+                self.cannot_do()
+        return None
 
-    def take_item(self, loc, item):
-        if mp.loc.has_item(item.get_name()):
+    #take item works only on items not obstacles, thus don't worry
+    #about setting tile item to None
+    def take_item(self, item):
+        #if item present in current location
+        if mp.game_map.get_location().has_item(item.get_name()):
             mp.ii.g_inv.add_item(item)
+            print(item.get_name(), "added to inventory.")
+            mp.game_map.get_location().item = None
         else:
             self.cannot_do()
             print("Item not found:", item.get_name())
@@ -100,11 +108,13 @@ class GParser(Parser):
 
     def command_choose(self):
         if self.get_verb() == 'view':
-            self.view(item=self.get_noun())
+            inp_noun = self.get_noun()
+            self.view(inp_noun)
         elif self.get_verb() == 'go':
             pass
         elif self.get_verb() == 'take':
-            self.take_item()
+            item = mp.ii.all_items.items_by_name[self.get_noun()]
+            self.take_item(item)
         elif self.get_verb() == 'use':
             self.use_item(item=self.get_noun())
 
@@ -113,5 +123,4 @@ cmdp = GParser()
 cmdp.recognized_commands = ['go', 'exit', 'view', 'take', 'use']
 cmdp.recognized_nouns = ['north', 'east', 'south', 'west', 'up', 'down',
 'game']
-cmdp.recognized_nouns.extend(mp.ii.item_nouns)
-
+cmdp.recognized_nouns.extend(mp.ii.all_items.items_by_name.keys())
