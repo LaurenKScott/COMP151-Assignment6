@@ -26,13 +26,6 @@ class Obstacle(Item):
         self.weakness = weakness
         #the item or next obstacle that is revealed upon defeat
         self.unlock = unlock
-
-    def defeat(self, input_obj):
-        if self.weakness is None:
-            return True
-        elif input_obj.get_name() == self.weakness.get_name():
-            return True
-        return False
         
 class Inventory:
     def __init__(self):
