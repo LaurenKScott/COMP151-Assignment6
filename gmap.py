@@ -38,8 +38,8 @@ class Grid:
         #returns a tile
         return self.current_pos
 
-    def travel(self,  nxt):
-        current = self.current_pos
+    def travel(self, nxt):
+        current = self.get_location()
         if nxt is None:
             print("Can't go there")
         else:

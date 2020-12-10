@@ -73,15 +73,15 @@ class GParser(Parser):
             return False
         return True
     
-    def go(self, current_tile, direction):
-       
+    def go(self, direction):
+        current_tile = mp.game_map.get_location()
         if direction not in ['up', 'down', 'north', 'east', 'south', 'west']:
             print("Invalid direction")
         else: 
             #get next tile by finding attribute with direction's name
             nxt_tile = getattr(current_tile, direction)
             # returns new current tile, see mp for travel documentation
-            mp.game_map.travel(current_tile, nxt_tile)
+            mp.game_map.travel(nxt_tile)
 
     def view(self, inp_noun=None):
         #view inventory condition
@@ -111,17 +111,23 @@ class GParser(Parser):
             self.cannot_do()
             print("Item not found:", item.get_name())
 
-    def use_item(self, item_name, cur_obs):
-        if item_name == mp.ii.cur_obs.get_weakness():
-            # find item in inventory's items by name dict
-            item_used = mp.ii.player_inv.items_by_name[item_name]
-            # call rem_item method, returns updated dict
-            mp.ii.player_inv.rem_item(item_used)
-            #set new obstacle (or item) to unlocked 
-            mp.ii.cur_obs = mp.ii.cur_obs.unlock
-        elif item_name not in mp.ii.player_inv.items_by_name:
-            self.cannot_do()
-            print(item_name, "not in inventory.")
+    def use_item(self, item_name):
+        current_location = mp.game_map.get_location()
+        # IF the item in the location is an instance of Obstacle,
+        if isinstance(current_location.item, mp.ii.Obstacle):
+            # AND the item name matches the name of the obstacle's weakness,
+            if item_name == current_location.item.weakness.get_name():
+                # THEN find item in inventory's items by name dict
+                item_used = mp.ii.player_inv.items_by_name[item_name]
+                # call rem_item method on player_inv, (return updated inv)
+                mp.ii.player_inv.rem_item(item_used)
+                #set new obstacle (or item) to unlocked 
+                current_location.item = current_location.item.unlock
+            # if attempting to use an item not in player's inventory
+            elif item_name not in mp.ii.player_inv.items_by_name:
+                self.cannot_do()
+                print(item_name, "not in inventory.")
+        # if the item in room is not an obstacle, or there is no item
         else:
             self.cannot_do()
             print(item_name, "didn't work.")
@@ -131,7 +137,7 @@ class GParser(Parser):
             inp_noun = self.get_noun()
             self.view(inp_noun)
         elif self.get_verb() == 'go':
-            pass
+            self.go()
         elif self.get_verb() == 'take':
             item = mp.ii.all_items.items_by_name[self.get_noun()]
             self.take_item(item)

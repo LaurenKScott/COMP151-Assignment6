@@ -127,5 +127,5 @@ all_items.add_item(empty_tank)
 hatch = Obstacle('hatch', 'a keypad to unlock the hatch', code, empty_tank)
 all_items.add_item(hatch)
 
-#Initialize player inventory
+#Initialize player inventory that is empty
 player_inv = Inventory()
