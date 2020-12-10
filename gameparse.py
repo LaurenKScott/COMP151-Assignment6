@@ -83,14 +83,16 @@ class GParser(Parser):
             # returns new current tile, see mp for travel documentation
             mp.game_map.travel(nxt_tile)
 
-    def view(self, inp_noun=None):
+    def view(self, inp_noun):
         #view inventory condition
         if inp_noun == "inventory":
             mp.ii.player_inv.describe_all()
+        # if no noun is given (i.e. 'view '),
         elif inp_noun == None:
         # view current tile description
             tile_view = mp.game_map.get_location()
             print(tile_view.get_description())
+        # if input noun is in current tile
         else:
             tile_inv =  mp.game_map.get_location().inv
             if tile_inv.in_inventory(inp_noun):
@@ -134,8 +136,7 @@ class GParser(Parser):
 
     def command_choose(self):
         if self.get_verb() == 'view':
-            inp_noun = self.get_noun()
-            self.view(inp_noun)
+            self.view(self.get_noun())
         elif self.get_verb() == 'go':
             self.go()
         elif self.get_verb() == 'take':
