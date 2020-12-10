@@ -46,9 +46,10 @@ class Grid:
         return self.current_pos
 
 # initialize nodes with descriptions 
-tile0 = Tile('You are on a rocky beach. ')
-tile1 = Tile('nothing here you are on an island ')
-tile2 = Tile('old seabird looks at you ')
+tile0 = Tile('''You find yourself on a cold and desolate beach. 
+Above you, only gray skies. You can see a foothold in the sheer cliff ahead. ''')
+tile1 = Tile('Looking around, you see that you are on a tiny island. ')
+tile2 = Tile('You see a putrid and rusted cistern. ')
 tile3 = Tile('what appears to be a shallow grave ')
 tile4 = Tile('mermaid cove ')
 tile5 = Tile('behind the lighthouse, a half-buried crate ')

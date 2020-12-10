@@ -27,6 +27,8 @@ def win_condition():
 #set win condition
 def main():
     print("Welcome to The Lighthouse.")
+    print()
+    print()
     while parser.continue_game():
         print(island.get_location().get_description())
         user_command = input("Enter a command: ")
