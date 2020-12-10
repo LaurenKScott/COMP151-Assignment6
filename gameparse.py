@@ -84,19 +84,26 @@ class GParser(Parser):
             mp.game_map.travel(nxt_tile)
 
     def view(self, inp_noun):
+        current_tile = mp.game_map.get_location()
         #view inventory condition
         if inp_noun == "inventory":
             mp.ii.player_inv.describe_all()
         # if no noun is given (i.e. 'view '),
         elif inp_noun == None:
         # view current tile description
-            current_tile = mp.game_map.get_location()
             print(current_tile.get_description())
         # if input noun is in current tile
         else:
-            tile_inv =  mp.game_map.get_location().inv
+            tile_inv =  current_tile.inv
             if tile_inv.in_inventory(inp_noun):
-                print(tile_inv.items_by_name[inp_noun].get_description())
+                obj = tile_inv.items_by_name[inp_noun]
+                print(obj.get_description())
+                # if the view item is an Obstacle with view as its weakness
+                if isinstance(obj, mp.ii.Obstacle) and obj.weakness == 'view':
+                    #no item needed to defeat
+                    obj.defeat(item_name = None)
+                    current_tile.item = obj.unlock
+                    current_tile.build_inv()
             else:
                 self.cannot_do()
         return None
@@ -119,8 +126,7 @@ class GParser(Parser):
         current_tile = mp.game_map.get_location()
         # IF the item in the location is an instance of Obstacle,
         if isinstance(current_tile.item, mp.ii.Obstacle):
-            # AND the item name matches the name of the obstacle's weakness,
-            if item_name == current_tile.item.weakness.get_name():
+            if current_tile.item.defeat(item_name):
                 # THEN find item in inventory's items by name dict
                 item_used = mp.ii.player_inv.items_by_name[item_name]
                 # call rem_item method on player_inv, (return updated inv)

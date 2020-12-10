@@ -26,6 +26,13 @@ class Obstacle(Item):
         self.weakness = weakness
         #the item or next obstacle that is revealed upon defeat
         self.unlock = unlock
+    
+    def defeat(self, item_name):
+        if self.weakness == 'view':
+            return True
+        elif item_name == self.weakness.get_name():
+            return True
+        return False
         
 class Inventory:
     def __init__(self):
@@ -57,10 +64,7 @@ class Inventory:
         else:
             print("Your inventory is empty.")
         return self.items_by_name
-
-
     
-
 #Initialize items in game, grouped by tile
 all_items = Inventory()
 #tile0
@@ -69,12 +73,12 @@ all_items.add_item(rock)
 #tile3
 shovel = Item('shovel', 'a small shovel')
 all_items.add_item(shovel)
-grave = Obstacle('grave', 'thankfully, the grave is empty', None, shovel)
+grave = Obstacle('grave', 'what appears to be a shallow grave', 'view', shovel)
 all_items.add_item(grave)
 #tile6
 axe = Item('axe', 'a rusted old axe, covered in barnacles')
 all_items.add_item(axe)
-boat = Obstacle('boat', 'the remains of a destroyed dinghy', None, axe)
+boat = Obstacle('boat', 'the remains of a destroyed dinghy', 'view', axe)
 all_items.add_item(boat)
 #tile5
 bread = Item('bread', 'some soggy old bread')
@@ -85,7 +89,8 @@ all_items.add_item(rations)
 #tile2
 cotton = Item('cotton', 'scraps of cotton from an old sailor\'s coat')
 all_items.add_item(cotton)
-nest = Obstacle('nest', 'a strange looking nest of cotton scraps', None, cotton)
+nest = Obstacle('nest', 'a strange looking nest of cotton scraps',
+ 'view', cotton)
 all_items.add_item(nest)
 bird = Obstacle('seabird', 'a crippled old seagull with a knowing gaze',\
     bread, nest)
@@ -101,9 +106,9 @@ all_items.add_item(mermaid)
 #tile7
 code = Item('code', 'a slip of paper that says: 9VK0A')
 all_items.add_item(code)
-book = Obstacle('book', 'a ragged book labelled "CAPTAIN\'S LOG"', None, code)
+book = Obstacle('book', 'a ragged book labelled "CAPTAIN\'S LOG"', 'view', code)
 all_items.add_item(book)
-shack = Obstacle('room', 'the dusty interior of a one-room shack', None, book)
+shack = Obstacle('room', 'the dusty interior of a one-room shack', 'view', book)
 all_items.add_item(shack)
 door = Obstacle('door', 'a locked door', key, shack) 
 all_items.add_item(door)
