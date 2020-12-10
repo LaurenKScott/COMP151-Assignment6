@@ -47,16 +47,16 @@ class Grid:
 
 # initialize nodes with descriptions 
 tile0 = Tile('You are on a rocky beach. ')
-tile1 = Tile('nothing here you are on an island')
-tile2 = Tile('old seabird looks at you')
-tile3 = Tile('what appears to be a shallow grave')
-tile4 = Tile('mermaid cove')
-tile5 = Tile('behind the lighthouse, a half-buried crate')
-tile6 = Tile('dock with smashed boat')
-tile7 = Tile('a locked door to shack')
-tile8 = Tile('ground floor lighthouse')
-tile9 = Tile('up the stairs, hatch')
-tile10 = Tile('top floor empty tank')
+tile1 = Tile('nothing here you are on an island ')
+tile2 = Tile('old seabird looks at you ')
+tile3 = Tile('what appears to be a shallow grave' )
+tile4 = Tile('mermaid cove' )
+tile5 = Tile('behind the lighthouse, a half-buried crate ')
+tile6 = Tile('dock with smashed boat ')
+tile7 = Tile('a locked door to shack ')
+tile8 = Tile('ground floor lighthouse ')
+tile9 = Tile('up the stairs, hatch ')
+tile10 = Tile('top floor empty tank ')
 
 # set up tile links on map (relative directions see map)
 tile0.up = tile1
@@ -83,6 +83,28 @@ tile2.build_inv()
 
 tile3.item = ii.grave
 tile3.build_inv()
+
+tile4.item = ii.mermaid
+tile4.build_inv()
+
+tile5.item = ii.rations
+tile5.build_inv()
+
+tile6.item = ii.boat
+tile6.build_inv()
+
+tile7.item = ii.door
+tile7.build_inv()
+
+tile8.item = ii.oil
+tile8.build_inv()
+
+tile9.item = ii.hatch
+tile9.build_inv()
+
+tile10.item = ii.empty_tank
+tile10.build_inv()
+
 #initialize game map
 game_map = Grid(start_pos=tile0, current_pos=tile0)
 
