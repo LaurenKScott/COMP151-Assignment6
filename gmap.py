@@ -49,8 +49,8 @@ class Grid:
 tile0 = Tile('You are on a rocky beach. ')
 tile1 = Tile('nothing here you are on an island ')
 tile2 = Tile('old seabird looks at you ')
-tile3 = Tile('what appears to be a shallow grave' )
-tile4 = Tile('mermaid cove' )
+tile3 = Tile('what appears to be a shallow grave ')
+tile4 = Tile('mermaid cove ')
 tile5 = Tile('behind the lighthouse, a half-buried crate ')
 tile6 = Tile('dock with smashed boat ')
 tile7 = Tile('a locked door to shack ')
@@ -107,4 +107,3 @@ tile10.build_inv()
 
 #initialize game map
 game_map = Grid(start_pos=tile0, current_pos=tile0)
-

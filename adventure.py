@@ -20,7 +20,7 @@ island = mp.game_map
 parser = pr.cmdp
 
 def win_condition():
-    if ii.unlit_wick.unlock == True:
+    if island.get_location().item == 'win':
         print("you win")
         return True
     return False

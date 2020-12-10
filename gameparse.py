@@ -105,32 +105,34 @@ class GParser(Parser):
     #about setting tile item to None
     def take_item(self, item):
         #if item present in current location
-        if mp.game_map.get_location().has_item(item.get_name()):
+        current_tile = mp.game_map.get_location()
+        if current_tile.has_item(item.get_name()):
             mp.ii.player_inv.add_item(item)
             print(item.get_name(), "added to inventory.")
-            mp.game_map.get_location().item = None
+            current_tile.item = None
+            current_tile.build_inv()
         else:
             self.cannot_do()
             print("Item not found:", item.get_name())
 
     def use_item(self, item_name):
-        current_location = mp.game_map.get_location()
+        current_tile = mp.game_map.get_location()
         # IF the item in the location is an instance of Obstacle,
-        if isinstance(current_location.item, mp.ii.Obstacle):
+        if isinstance(current_tile.item, mp.ii.Obstacle):
             # AND the item name matches the name of the obstacle's weakness,
-            if item_name == current_location.item.weakness.get_name():
+            if item_name == current_tile.item.weakness.get_name():
                 # THEN find item in inventory's items by name dict
                 item_used = mp.ii.player_inv.items_by_name[item_name]
                 # call rem_item method on player_inv, (return updated inv)
                 mp.ii.player_inv.rem_item(item_used)
                 #set new obstacle (or item) to unlocked 
-                current_location.item = current_location.item.unlock
+                current_tile.item = current_tile.item.unlock
                 # adjust tile's inventory
-                current_location.build_inv()
+                current_tile.build_inv()
             # if attempting to use an item not in player's inventory
-            elif item_name not in mp.ii.player_inv.items_by_name:
-                self.cannot_do()
-                print(item_name, "not in inventory.")
+        if item_name not in mp.ii.player_inv.items_by_name:
+            self.cannot_do()
+            print(item_name, "not in inventory.")
         # if the item in room is not an obstacle, or there is no item
         else:
             self.cannot_do()
@@ -145,11 +147,11 @@ class GParser(Parser):
             item = mp.ii.all_items.items_by_name[self.get_noun()]
             self.take_item(item)
         elif self.get_verb() == 'use':
-            self.use_item(item=self.get_noun())
+            self.use_item(self.get_noun())
 
 #game-specific parser
 cmdp = GParser()
 cmdp.recognized_commands = ['go', 'exit', 'view', 'take', 'use']
 cmdp.recognized_nouns = ['north', 'east', 'south', 'west', 'up', 'down',
-'game']
+'game', 'inventory']
 cmdp.recognized_nouns.extend(mp.ii.all_items.items_by_name.keys())
