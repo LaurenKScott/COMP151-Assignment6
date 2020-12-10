@@ -128,4 +128,4 @@ hatch = Obstacle('hatch', 'a keypad to unlock the hatch', code, empty_tank)
 all_items.add_item(hatch)
 
 #Initialize player inventory
-g_inv = Inventory()
+player_inv = Inventory()

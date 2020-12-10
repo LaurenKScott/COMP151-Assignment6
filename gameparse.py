@@ -8,7 +8,8 @@ class Parser:
         self.recognized_commands = []
         # A list of nouns (and directions!) 
         self.recognized_nouns = []
-        
+        self.verb, self.noun = None, None
+
     #Check input phrase for validity
     def valid(self, phrase):
         if phrase.strip() == '':
@@ -22,7 +23,7 @@ class Parser:
             print("Unrecognized command:", check_verb)
             return False
         #only 'view' and 'exit' are valid one-word command phrases
-        if phrase_as_list < 2 and not \
+        if len(phrase_as_list) < 2 and not \
             (check_verb =='exit' or check_verb =='view'):
             print("Incomplete phrase.")
             return False
@@ -85,7 +86,7 @@ class GParser(Parser):
     def view(self, inp_noun=None):
         #view inventory condition
         if inp_noun == "inventory":
-            mp.ii.g_inv.describe_all()
+            mp.ii.player_inv.describe_all()
         elif inp_noun == None:
         # view current tile description
             tile_view = mp.game_map.get_location()
@@ -103,7 +104,7 @@ class GParser(Parser):
     def take_item(self, item):
         #if item present in current location
         if mp.game_map.get_location().has_item(item.get_name()):
-            mp.ii.g_inv.add_item(item)
+            mp.ii.player_inv.add_item(item)
             print(item.get_name(), "added to inventory.")
             mp.game_map.get_location().item = None
         else:
@@ -113,12 +114,12 @@ class GParser(Parser):
     def use_item(self, item_name, cur_obs):
         if item_name == mp.ii.cur_obs.get_weakness():
             # find item in inventory's items by name dict
-            item_used = mp.ii.g_inv.items_by_name[item_name]
+            item_used = mp.ii.player_inv.items_by_name[item_name]
             # call rem_item method, returns updated dict
-            mp.ii.g_inv.rem_item(item_used)
+            mp.ii.player_inv.rem_item(item_used)
             #set new obstacle (or item) to unlocked 
             mp.ii.cur_obs = mp.ii.cur_obs.unlock
-        elif item_name not in mp.ii.g_inv.items_by_name:
+        elif item_name not in mp.ii.player_inv.items_by_name:
             self.cannot_do()
             print(item_name, "not in inventory.")
         else:

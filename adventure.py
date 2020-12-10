@@ -13,10 +13,10 @@ import gmap as mp
 import gameparse as pr 
 
 #Initialize inventory
-inv = ii.g_inv
+player_inv = ii.player_inv
 #initialize island map (see map.py for tile info)
 island = mp.game_map
-current_loc= mp.game_map.start_pos
+current_loc = mp.game_map.get_location()
 #Initialize parser
 parser = pr.cmdp
 
