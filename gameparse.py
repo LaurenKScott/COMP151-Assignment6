@@ -9,24 +9,28 @@ class Parser:
         # A list of nouns (and directions!) 
         self.recognized_nouns = []
         # Initialize a verb and noun both None
-
+    def valid(self, phrase):
+        phrase_as_list = phrase.split()
+        check_verb = phrase_as_list[0].lower()
+        if check_verb not in self.recognized_commands:
+            print("Unrecognized command:", check_verb)
+            return False
+        if phrase_as_list > 1:
+            check_noun = phrase_as_list[1].lower()
+            if check_noun not in self.recognized_nouns:
+                print("Unrecognized noun:", check_noun)
+                return False
+        return True
     #a parser to separate verb and noun from user input
     def parse(self, phrase):
         self.verb, self.noun = None, None
-        phrase_as_list = phrase.split()
-        # Check if first word of phrase is a recognized command verb
-        parse_verb = phrase_as_list[0].lower()
-        if parse_verb not in self.recognized_commands:
-            print("Unrecognized verb:", parse_verb)
+        while not self.valid(phrase):
+            phrase = input("Try again." )
         else:
-            self.verb = parse_verb    
-        #extract noun from phrase, check against list
-        if len(phrase_as_list) > 1:
-            parse_noun = phrase_as_list[1].lower()
-            if parse_noun not in self.recognized_nouns:
-                print("Unrecognized noun:", parse_noun)
-            else:
-                self.noun = parse_noun
+            verb_noun = phrase.split()
+            self.verb = verb_noun[0].lower()
+            if len(verb_noun) > 1:
+                self.noun = verb_noun[1].lower()
         #returns verb, noun tuple
         return self.verb, self.noun
     
