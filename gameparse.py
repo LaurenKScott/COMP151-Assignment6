@@ -8,19 +8,34 @@ class Parser:
         self.recognized_commands = []
         # A list of nouns (and directions!) 
         self.recognized_nouns = []
-        # Initialize a verb and noun both None
+        
+    #Check input phrase for validity
     def valid(self, phrase):
+        if phrase.strip() == '':
+            print("No command given")
+            return False
+        # break phrase into list of words
         phrase_as_list = phrase.split()
+        # check first word (lowercase) against recognized commands
         check_verb = phrase_as_list[0].lower()
         if check_verb not in self.recognized_commands:
             print("Unrecognized command:", check_verb)
             return False
-        if phrase_as_list > 1:
+        #only 'view' and 'exit' are valid one-word command phrases
+        if phrase_as_list < 2 and not \
+            (check_verb =='exit' or check_verb =='view'):
+            print("Incomplete phrase.")
+            return False
+        # if phrase is 2 words or greater
+        elif len(phrase_as_list) > 1:
+            # consider 2nd word as noun. check against recognized nouns
             check_noun = phrase_as_list[1].lower()
             if check_noun not in self.recognized_nouns:
                 print("Unrecognized noun:", check_noun)
                 return False
+        # if noun and verb both recognized
         return True
+
     #a parser to separate verb and noun from user input
     def parse(self, phrase):
         self.verb, self.noun = None, None
