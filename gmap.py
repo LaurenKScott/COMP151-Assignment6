@@ -39,12 +39,11 @@ class Grid:
         return self.current_pos
 
     def travel(self, nxt):
-        current = self.get_location()
         if nxt is None:
             print("Can't go there")
         else:
-            current = nxt
-        return current
+            self.current_pos = nxt
+        return self.current_pos
 
 # initialize nodes with descriptions 
 tile0 = Tile('You are on a rocky beach. ')
@@ -77,7 +76,13 @@ tile10.down = tile9
 tile0.item = ii.rock
 tile0.build_inv()
 
+tile1.build_inv()
 
+tile2.item = ii.bird
+tile2.build_inv()
+
+tile3.item = ii.grave
+tile3.build_inv()
 #initialize game map
 game_map = Grid(start_pos=tile0, current_pos=tile0)
 

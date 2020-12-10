@@ -16,7 +16,6 @@ import gameparse as pr
 player_inv = ii.player_inv
 #initialize island map (see map.py for tile info)
 island = mp.game_map
-current_loc = mp.game_map.get_location()
 #Initialize parser
 parser = pr.cmdp
 
@@ -29,7 +28,7 @@ def win_condition():
 def main():
     print("Welcome to The Lighthouse.")
     while parser.continue_game():
-        print(current_loc.get_description())
+        print(island.get_location().get_description())
         user_command = input("Enter a command: ")
         parser.parse(user_command)
         parser.command_choose()

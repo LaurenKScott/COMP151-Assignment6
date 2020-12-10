@@ -90,8 +90,8 @@ class GParser(Parser):
         # if no noun is given (i.e. 'view '),
         elif inp_noun == None:
         # view current tile description
-            tile_view = mp.game_map.get_location()
-            print(tile_view.get_description())
+            current_tile = mp.game_map.get_location()
+            print(current_tile.get_description())
         # if input noun is in current tile
         else:
             tile_inv =  mp.game_map.get_location().inv
@@ -125,6 +125,8 @@ class GParser(Parser):
                 mp.ii.player_inv.rem_item(item_used)
                 #set new obstacle (or item) to unlocked 
                 current_location.item = current_location.item.unlock
+                # adjust tile's inventory
+                current_location.build_inv()
             # if attempting to use an item not in player's inventory
             elif item_name not in mp.ii.player_inv.items_by_name:
                 self.cannot_do()
@@ -138,7 +140,7 @@ class GParser(Parser):
         if self.get_verb() == 'view':
             self.view(self.get_noun())
         elif self.get_verb() == 'go':
-            self.go()
+            self.go(self.get_noun())
         elif self.get_verb() == 'take':
             item = mp.ii.all_items.items_by_name[self.get_noun()]
             self.take_item(item)
