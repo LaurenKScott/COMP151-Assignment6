@@ -47,20 +47,20 @@ class Grid:
         return self.current_pos
 
 # initialize nodes with descriptions 
-tile0 = Tile('''You find yourself on a cold and desolate beach. \ 
+tile0 = Tile('''You find yourself on a cold and desolate beach. 
 Above you, only gray skies. You can see a foothold in the sheer cliff ahead. ''')
 tile1 = Tile('''Looking around, you see that you are on a tiny island. 
 You see an old lighthouse and rickety shack in the distance, but the island
 appears to be uninhabited. ''')
-tile2 = Tile('Ahead of you is an old stump. ')
-tile3 = Tile('A crude wooden cross marks a shallow pit ')
+tile2 = Tile('Ahead of you is a rotting log. ')
+tile3 = Tile('Across the field of low sea-grass, a crude wooden cross marks an open pit ')
 tile4 = Tile('You come across a small cove carved into the shore ')
-tile5 = Tile('behind the lighthouse, a half-buried crate ')
-tile6 = Tile('dock with smashed boat ')
-tile7 = Tile('a locked door to shack ')
+tile5 = Tile('On the opposite end of the lighthouse, shielded from the wind, you stumble over something half-buried in the dirt')
+tile6 = Tile('At the dock, you see a small boat ')
+tile7 = Tile('This could only be the lightkeeper\'s shack. The door is fitted with a heavy padlock. ')
 tile8 = Tile('ground floor lighthouse, illuminated ')
-tile9 = Tile('up the stairs, hatch ')
-tile10 = Tile('You pass through the entry hatch into the lightkeep. ')
+tile9 = Tile('In the middle of the stairwell, you pause. Above you is the hatch to the light. On the wall ')
+tile10 = Tile('Finally, you have made your way to the heart of the lighthouse. But still no lightkeeper. ')
 
 # set up tile links on map (relative directions see map)
 tile0.up = tile1
