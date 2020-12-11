@@ -20,7 +20,7 @@ island = mp.game_map
 parser = pr.cmdp
 
 def win_condition():
-    if island.get_location().item == 'win':
+    if island.get_location() == mp.tile10 and island.get_location().item is None:
         print("you win")
         return True
     return False
@@ -28,9 +28,9 @@ def win_condition():
 def main():
     print("Welcome to The Lighthouse.")
     print()
-    print()
-    while parser.continue_game():
-        print(island.get_location().get_description())
+    print(island.get_location().get_description())
+
+    while parser.continue_game() and not win_condition():
         user_command = input("Enter a command: ")
         parser.parse(user_command)
         parser.command_choose()

@@ -91,7 +91,7 @@ class GParser(Parser):
         # if no noun is given (i.e. 'view '),
         elif inp_noun == None:
         # view current tile description
-            print(current_tile.get_description())
+           print(current_tile.get_description())
         # if input noun is in current tile
         else:
             tile_inv =  current_tile.inv
@@ -101,9 +101,10 @@ class GParser(Parser):
                 # if the view item is an Obstacle with view as its weakness
                 if isinstance(obj, mp.ii.Obstacle) and obj.weakness == 'view':
                     #no item needed to defeat
-                    obj.defeat(item_name = None)
+                    obj.defeat(item_name = 'view')
                     current_tile.item = obj.unlock
                     current_tile.build_inv()
+                    print(current_tile.get_description())
             else:
                 self.cannot_do()
         return None
@@ -124,8 +125,13 @@ class GParser(Parser):
 
     def use_item(self, item_name):
         current_tile = mp.game_map.get_location()
+         # if attempting to use an item not in player's inventory
+        if item_name not in mp.ii.player_inv.items_by_name:
+            self.cannot_do()
+            print(item_name, "not in inventory.")
         # IF the item in the location is an instance of Obstacle,
-        if isinstance(current_tile.item, mp.ii.Obstacle):
+        elif isinstance(current_tile.item, mp.ii.Obstacle):
+            # AND IF the item defeats the obstacle
             if current_tile.item.defeat(item_name):
                 # THEN find item in inventory's items by name dict
                 item_used = mp.ii.player_inv.items_by_name[item_name]
@@ -135,15 +141,16 @@ class GParser(Parser):
                 current_tile.item = current_tile.item.unlock
                 # adjust tile's inventory
                 current_tile.build_inv()
-            # if attempting to use an item not in player's inventory
-        if item_name not in mp.ii.player_inv.items_by_name:
-            self.cannot_do()
-            print(item_name, "not in inventory.")
+            # ELSE (if item does not defeat obstacle)
+            else:
+                self.cannot_do()
+                print(item_name, "didn't work.")
+       
         # if the item in room is not an obstacle, or there is no item
         else:
             self.cannot_do()
-            print(item_name, "didn't work.")
-
+    
+    # translates commands entered to the function 
     def command_choose(self):
         if self.get_verb() == 'view':
             self.view(self.get_noun())
