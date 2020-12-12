@@ -24,17 +24,24 @@ def win_condition():
         print("you win")
         return True
     return False
-#set win condition
-def main():
-    print("Welcome to The Lighthouse.")
+
+def play_game():
+    print("THE LIGHTHOUSE")
     print()
     print(island.get_location().get_description())
-
     while parser.continue_game() and not win_condition():
         user_command = input("Enter a command: ")
         parser.parse(user_command)
         parser.command_choose()
+        #print newline between commands
+        print()
     else:
         print("Goodbye.")
-        exit
+    
+#set win condition
+def main():
+
+    play_game()
+
+    
 main()

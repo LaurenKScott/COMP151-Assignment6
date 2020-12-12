@@ -14,29 +14,29 @@ adventure.py: this is where the game itself is played
 
 
 ### Walkthrough [Spoilers!]
-> take rock
-> go up 
-> go west
-> go north
-> view grave. take shovel.
-> go east
-> use shovel. take bread.
-> go north
-> view boat. take axe.
-> go south
-> go south
-> go west
-> use bread. view nest. take cotton.
-> go north
-> go north
-> use cotton. use axe. take key.
-> go south
-> go south
-> go east
-> go east
-> use key. view book. take code.
-> go north
-> take oil
-> go up
-> go up
-> use code. use oil. use rock. ("win")
+> take rock <br>
+> go up <br>
+> go west <br>
+> go north <br>
+> view grave. take shovel. <br>
+> go east <br>
+> use shovel. take bread. <br>
+> go north <br>
+> view boat. take axe. <br>
+> go south <br>
+> go south <br>
+> go west <br>
+> use bread. view nest. take cotton. <br>
+> go north <br>
+> go north <br>
+> use cotton. use axe. take key. <br>
+> go south <br>
+> go south <br>
+> go east <br>
+> go east <br>
+> use key. view book. take code. <br>
+> go north <br> 
+> take oil <br>
+> go up <br>
+> go up <br>
+> use code. use oil. use rock. (win)
