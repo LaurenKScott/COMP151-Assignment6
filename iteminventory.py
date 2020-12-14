@@ -82,35 +82,46 @@ shovel = Item('shovel', 'a small shovel')
 all_items.add_item(shovel)
 grave = Obstacle('grave', 'what appears to be a shallow grave',\
      'view', shovel)
-grave.defeat_message = 'Thankfully, the grave is empty. Inside the grave '
+grave.defeat_message = 'Thankfully, the grave is empty. Inside the grave, a well-worn shovel.'
 all_items.add_item(grave)
 #tile6
 axe = Item('axe', 'a rusted old axe, covered in barnacles')
 all_items.add_item(axe)
-boat = Obstacle('boat', 'the remains of a destroyed dinghy', 'view', axe)
+boat = Obstacle('boat', 'the remains of a small boat', 'view', axe)
+boat.defeat_message = '''The dinghy was ravaged not by the stormy waters, but by man. \
+    A message was hacked into the splintered bow: "Wickies heed not the siren call". You see an axe lying on the dock.'''
 all_items.add_item(boat)
 #tile5
 bread = Item('bread', 'some soggy old bread')
 all_items.add_item(bread)
 rations = Obstacle('crate', 'a wooden crate labelled "EMERGENCY RATIONS"',\
     shovel, bread)
+rations.defeat_message = 'You excitedly open the crate, only to find a few crumbs of bread, too soggy even for you to eat.'
 all_items.add_item(rations)
 #tile2
 cotton = Item('cotton', 'scraps of cotton from an old sailor\'s coat')
 all_items.add_item(cotton)
-nest = Obstacle('nest', 'a strange looking nest of cotton scraps',
+nest = Obstacle('nest', 'a strange looking nest',
  'view', cotton)
+nest.defeat_message = 'As you approach, you see that the nest is made up of the cotton scraps from an old sailor\'s coat.'
 all_items.add_item(nest)
-bird = Obstacle('seabird', 'a crippled old gull guarding its nest',\
+bird = Obstacle('bird', 'a crippled old gull guarding its nest',\
     bread, nest)
+bird.defeat_message = '''You scatter the crumbs over the ground. \
+    The gull hops down to eat them, then glances back at you before flying away. '''
 all_items.add_item(bird)
 #tile4
 key = Item('key', 'a large key on a silver chain')
 all_items.add_item(key)
-medusa = Obstacle('medusa', 'a fearsome creature', axe, key)
+medusa = Obstacle('medusa', 'a fearsome creature with eels for hair', axe, key)
 all_items.add_item(medusa)
+medusa.defeat_message = '''Charging forward into the surf, you swing wildly at the creature with your axe. \
+    Suddenly, her form changes again, and you see that you are wrestling with a mass of seaweed and fishing nets.\
+        Among the tangled mass is a glimmering metal key'''
 mermaid = Obstacle('mermaid', 'a beautiful woman with the voice of an angel',\
     cotton, medusa)
+mermaid.defeat_message = '''You tear off two strips of cotton and stuff them into your ears. Realizing that her song cannot sway you, \
+    the mermaid's face twists into a horrifying snarl. Her beauty is gone, replaced by a hideous sea-witch.'''
 all_items.add_item(mermaid)
 #tile7
 code = Item('code', 'a slip of paper that says: 9VK0A')
