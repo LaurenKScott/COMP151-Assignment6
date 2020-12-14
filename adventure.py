@@ -3,7 +3,10 @@
 
 """
 
-RULES AND OBJECTIVES: TBD
+HOW TO PLAY
+Objective - get to the top of the lighthouse and signal for help.
+Instructions - when prompted, enter a command into the terminal. commands are one or two word phrases
+consisting of a verb and a noun or direction. use commands to move around the map and to interact with objects 
 
 """
 
