@@ -3,7 +3,7 @@
 
 <p>Premise: you awake after a storm on a tiny island. Looking around, you find an abandoned lighthouse, as well as some unsettling clues about the last lightkeeper's fate. With only your wits and the objects you find, can you reach the lighthouse and signal for help?</P>
 
-<p> Inspired by Robert Eggers' film *The Lighthouse* (2019)
+<p>Inspired by Robert Eggers' film *The Lighthouse* (2019) </p>
 
 ### Files
 iteminventory.py: contains the Item, Obstacle, and Inventory classes 
