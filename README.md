@@ -3,6 +3,8 @@
 
 <p>Premise: you awake after a storm on a tiny island. Looking around, you find an abandoned lighthouse, as well as some unsettling clues about the last lightkeeper's fate. With only your wits and the objects you find, can you reach the lighthouse and signal for help?</P>
 
+<p> Inspired by Robert Eggers' film *The Lighthouse* (2019)
+
 ### Files
 iteminventory.py: contains the Item, Obstacle, and Inventory classes 
 
@@ -12,6 +14,7 @@ gameparse.py: the Parser class, which takes player inputs and translates them to
 
 adventure.py: this is where the game itself is played  
 
+Island_Map.svg: scalable diagram showing tile-to-tile relationships
 
 ### Walkthrough [Spoilers!]
 > take rock <br>
