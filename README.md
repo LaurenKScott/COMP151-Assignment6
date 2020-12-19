@@ -23,28 +23,19 @@ Island_Map.svg: scalable diagram showing tile-to-tile relationships
 
 ### Walkthrough [Spoilers!]
 > take rock <br>
-> go up <br>
-> go west <br>
-> go north <br>
-> view grave. take shovel. <br>
+> go up. go west. go north <br>
+> view grave. take shovel <br>
 > go east <br>
-> use shovel. take bread. <br>
+> use shovel. take bread <br>
 > go north <br>
-> view boat. take axe. <br>
-> go south <br>
-> go south <br>
-> go west <br>
-> use bread. view nest. take cotton. <br>
-> go north <br>
-> go north <br>
+> view boat. take axe <br>
+> go south. go south. go west <br>
+> use bread. view nest. take cotton <br>
+> go north. go north <br>
 > use cotton. use axe. take key. <br>
-> go south <br>
-> go south <br>
-> go east <br>
-> go east <br>
+> go south. go south. go east. go east <br>
 > use key. view book. take code. <br>
 > go north <br> 
 > take oil <br>
-> go up <br>
-> go up <br>
+> go up. go up <br>
 > use code. use oil. use rock. (win)
