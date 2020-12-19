@@ -8,7 +8,7 @@ Inspired by Robert Eggers' film *The Lighthouse* (2019)
 ## How to Play
 <p> clone repo and run adventure.py </p>
 <p> when prompted, enter a command. 'commands' are one or two-word phrases consisting of a verb and (optionally) a noun or direction. </p>
-<br>
+
 *Stuck? start with 'view' to see a description of your current location!*
 
 ## Files
