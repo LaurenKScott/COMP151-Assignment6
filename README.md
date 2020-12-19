@@ -8,9 +8,10 @@ Inspired by Robert Eggers' film *The Lighthouse* (2019)
 ## How to Play
 <p> clone repo and run adventure.py </p>
 <p> when prompted, enter a command. 'commands' are one or two-word phrases consisting of a verb and (optionally) a noun or direction. </p>
-<p><br> * stuck? start with 'view' to see a description of your current location! * </p>
+<p><br></p>
+* Stuck? start with 'view' to see a description of your current location! * 
 
-### Files
+## Files
 iteminventory.py: contains the Item, Obstacle, and Inventory classes 
 
 gmap.py: contains the Tile and Grid class, which utilize linked list concepts to help the player navigate a 3-D map   
