@@ -58,6 +58,8 @@ class Parser:
     def get_noun(self):
         return self.noun
 
+
+# Now, a parser with functions specific to the adventure.py game
 class GParser(Parser):
     def __init__(self):
         Parser.__init__(self)
