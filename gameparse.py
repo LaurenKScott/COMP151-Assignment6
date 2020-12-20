@@ -106,7 +106,6 @@ class GParser(Parser):
                     obj.defeat(item_name = 'view')
                     current_tile.item = obj.unlock
                     current_tile.build_inv()
-                    print(current_tile.get_description())
             else:
                 self.cannot_do()
         return None
